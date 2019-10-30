@@ -11,7 +11,6 @@ export default class App extends Component {
   };
 
   timerStart = () => {
-    console.log("Timer Started");
     this.setState(prevState => ({
       timerStarted: !prevState.timerStarted
     }));
@@ -24,7 +23,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Timer handleTimeSelectChange={this.handleTimeSelectChange} />
+        <Timer
+          handleTimeSelectChange={this.handleTimeSelectChange}
+          timerStatus={this.state.timerStarted}
+          time={this.state.time}
+        />
         <StartButton
           timerStart={this.timerStart}
           timerStatus={this.state.timerStarted}
