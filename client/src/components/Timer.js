@@ -6,10 +6,6 @@ export default class Timer extends Component {
     time: 25
   };
 
-  handleChange = event => {
-    this.setState({ time: event.target.value });
-  };
-
   render() {
     return (
       <div id="timer">
@@ -19,7 +15,7 @@ export default class Timer extends Component {
           min="1"
           max="60"
           defaultValue="25"
-          onChange={this.handleChange}
+          onChange={this.props.handleTimeSelectChange}
         ></input>
       </div>
     );

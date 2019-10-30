@@ -6,7 +6,8 @@ import ClearButton from "./ClearButton";
 
 export default class App extends Component {
   state = {
-    timerStarted: false
+    timerStarted: false,
+    time: 25
   };
 
   timerStart = () => {
@@ -16,10 +17,14 @@ export default class App extends Component {
     }));
   };
 
+  handleTimeSelectChange = event => {
+    this.setState({ time: event.target.value });
+  };
+
   render() {
     return (
       <div className="App">
-        <Timer />
+        <Timer handleTimeSelectChange={this.handleTimeSelectChange} />
         <StartButton
           timerStart={this.timerStart}
           timerStatus={this.state.timerStarted}
