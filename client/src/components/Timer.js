@@ -14,7 +14,7 @@ export default class Timer extends Component {
             onChange={this.props.handleTimeSelectChange}
           ></input>
         ) : (
-          <span>{this.props.time}</span>
+          <span>{this.props.timeInMinutes}</span>
         )}
       </div>
     );
