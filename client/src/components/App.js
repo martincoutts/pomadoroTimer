@@ -23,7 +23,14 @@ export default class App extends Component {
   };
 
   handleTimeSelectChange = event => {
-    this.setState({ timeInMinutes: parseInt(event.target.value) });
+    if (
+      parseInt(event.target.value) > 0 &&
+      parseInt(event.target.value) <= 60
+    ) {
+      this.setState({ timeInMinutes: parseInt(event.target.value) });
+    } else {
+      alert("Please select a value between 1 and 60");
+    }
   };
 
   convertToSeconds = mins => {
