@@ -38,6 +38,7 @@ export default class App extends Component {
       timerCycleActive: true
     });
     let minutes = duration;
+
     setInterval(() => {
       if (minutes > 0 && this.state.timerStarted) {
         minutes = minutes - 1;
@@ -45,14 +46,17 @@ export default class App extends Component {
           timeInMinutes: minutes,
           timer: minutes
         });
+      } else if (this.state.timer === 0) {
+        clearInterval();
+        this.setState({
+          timerCycleActive: false,
+          timerStarted: false,
+          timeInMinutes: 25,
+          timer: "--"
+        });
       }
       // Change to 6000 when using minutes
     }, 1000);
-    if (minutes === 0) {
-      this.setState({
-        timerCycleActive: false
-      });
-    }
   };
 
   render() {
