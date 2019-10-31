@@ -8,10 +8,12 @@ export default class App extends Component {
   state = {
     // Sets default state of timer state
     timerStarted: false,
+    timerCycleActive: false,
     // Default value in minutes
     timeInMinutes: 25,
     // Default value in seconds (25 * 60)
-    timeInSeconds: 1500
+    timeInSeconds: 1500,
+    timer: "--"
   };
 
   timerStart = () => {
@@ -21,7 +23,7 @@ export default class App extends Component {
   };
 
   handleTimeSelectChange = event => {
-    this.setState({ timeInMinutes: event.target.value });
+    this.setState({ timeInMinutes: parseInt(event.target.value) });
   };
 
   convertToSeconds = mins => {
@@ -29,6 +31,28 @@ export default class App extends Component {
     this.setState({
       timeInSeconds: seconds
     });
+  };
+
+  timer = duration => {
+    this.setState({
+      timerCycleActive: true
+    });
+    let minutes = duration;
+    setInterval(() => {
+      if (minutes > 0 && this.state.timerStarted) {
+        minutes = minutes - 1;
+        this.setState({
+          timeInMinutes: minutes,
+          timer: minutes
+        });
+      }
+      // Change to 6000 when using minutes
+    }, 1000);
+    if (minutes === 0) {
+      this.setState({
+        timerCycleActive: false
+      });
+    }
   };
 
   render() {
@@ -39,12 +63,14 @@ export default class App extends Component {
           timerStatus={this.state.timerStarted}
           timeInMinutes={this.state.timeInMinutes}
           timeInSeconds={this.state.timeInSeconds}
+          timer={this.state.timer}
         />
         <StartButton
           timerStart={this.timerStart}
           timerStatus={this.state.timerStarted}
           timeInMinutes={this.state.timeInMinutes}
           convertToSeconds={this.convertToSeconds}
+          timer={this.timer}
         />
         <ClearButton />
       </div>

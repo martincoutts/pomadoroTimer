@@ -8,6 +8,7 @@ export default class StartButton extends Component {
           onClick={event => {
             this.props.timerStart();
             this.props.convertToSeconds(this.props.timeInMinutes);
+            this.props.timer(this.props.timeInMinutes);
           }}
         >
           {this.props.timerStatus === false ? "Start" : "Pause"}

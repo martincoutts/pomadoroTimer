@@ -10,11 +10,11 @@ export default class Timer extends Component {
             type="number"
             min="1"
             max="60"
-            defaultValue="25"
+            defaultValue={this.props.timeInMinutes}
             onChange={this.props.handleTimeSelectChange}
           ></input>
         ) : (
-          <span>{this.props.timeInMinutes}</span>
+          <span>{this.props.timer}</span>
         )}
       </div>
     );
