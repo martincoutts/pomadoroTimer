@@ -11,7 +11,7 @@ let timerInterval;
 export default class App extends Component {
   state = {
     // Sets default state of timer state
-    timerStarted: false,
+    timerActive: false,
     timerCycleActive: false,
     // Default value in minutes
     timeInMinutes: 25,
@@ -23,7 +23,7 @@ export default class App extends Component {
 
   timerStart = () => {
     this.setState(prevState => ({
-      timerStarted: !prevState.timerStarted
+      timerActive: !prevState.timerActive
     }));
   };
 
@@ -58,7 +58,7 @@ export default class App extends Component {
 
     // This then takes over altering the timer value every second
     timerInterval = setInterval(() => {
-      if (minutes > 0 && this.state.timerStarted) {
+      if (minutes > 0 && this.state.timerActive) {
         minutes = minutes - 1;
         this.setState({
           timeInMinutes: minutes,
@@ -75,11 +75,11 @@ export default class App extends Component {
     }, 1000);
   };
 
-  // Alters timerStarted state to show start button and then clears interval.
+  // Alters timerActive state to show start button and then clears interval.
   // Means that when start button is clicked the a new interval is created but with the existing state
   timerPause = () => {
     this.setState(prevState => ({
-      timerStarted: !prevState.timerStarted
+      timerActive: !prevState.timerActive
     }));
     clearInterval(timerInterval);
   };
@@ -88,9 +88,10 @@ export default class App extends Component {
   // Resets default state
   timerReset = () => {
     clearInterval(timerInterval);
+
     this.setState({
       timerCycleActive: false,
-      timerStarted: false,
+      timerActive: false,
       timeInMinutes: 25,
       timer: ""
     });
@@ -100,11 +101,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <div id="timer">
-          {/* Conditional rendering based on timerStarted state */}
-          {this.state.timerStarted === false ? (
+          {/* Conditional rendering based on timerActive state */}
+          {this.state.timerActive === false ? (
             <TimerInput
               handleTimeSelectChange={this.handleTimeSelectChange}
-              timerStatus={this.state.timerStarted}
+              timerStatus={this.state.timerActive}
               timeInMinutes={this.state.timeInMinutes}
               timeInSeconds={this.state.timeInSeconds}
               updateTimer={this.updateTimer}
@@ -114,11 +115,11 @@ export default class App extends Component {
           )}
         </div>
 
-        {/* Conditional rendering based on timerStarted state */}
-        {this.state.timerStarted === false ? (
+        {/* Conditional rendering based on timerActive state */}
+        {this.state.timerActive === false ? (
           <StartButton
             timerStart={this.timerStart}
-            timerStatus={this.state.timerStarted}
+            timerStatus={this.state.timerActive}
             timeInMinutes={this.state.timeInMinutes}
             convertToSeconds={this.convertToSeconds}
             timer={this.timer}
@@ -127,11 +128,7 @@ export default class App extends Component {
           <PauseButton timerPause={this.timerPause} />
         )}
 
-        <ClearButton
-          timerReset={this.timerReset}
-          updateTimer={this.handleUpdateTimer}
-          functionTrigger={this.functionTrigger}
-        />
+        <ClearButton timerReset={this.timerReset} />
       </div>
     );
   }

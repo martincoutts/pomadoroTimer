@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Timer extends Component {
-  render() {
-    return (
-      <input
-        id="timeSelector"
-        className="timer timer__input"
-        type="number"
-        min="1"
-        max="60"
-        defaultValue={this.props.timeInMinutes}
-        onChange={this.props.handleTimeSelectChange}
-      ></input>
-    );
-  }
-}
+const TimerInput = props => {
+  return (
+    <input
+      id="timeSelector"
+      className="timer timer__input"
+      type="number"
+      min="1"
+      max="60"
+      value={props.timeInMinutes}
+      onChange={props.handleTimeSelectChange}
+    ></input>
+  );
+};
+
+export default TimerInput;
