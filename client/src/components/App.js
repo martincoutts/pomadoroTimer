@@ -13,7 +13,7 @@ export default class App extends Component {
     timeInMinutes: 25,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
-    timer: "--"
+    timer: ""
   };
 
   timerStart = () => {
@@ -46,6 +46,11 @@ export default class App extends Component {
     });
     let minutes = duration;
 
+    // Makes sure that when start button is clicked the first second shows the input value before the interval kicks in
+    this.setState({
+      timer: minutes
+    });
+    // This then takes over altering the timer value every second
     setInterval(() => {
       if (minutes > 0 && this.state.timerStarted) {
         minutes = minutes - 1;
@@ -59,7 +64,7 @@ export default class App extends Component {
           timerCycleActive: false,
           timerStarted: false,
           timeInMinutes: 25,
-          timer: "--"
+          timer: ""
         });
       }
       // Change to 6000 when using minutes
