@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import TimerInput from "./TimerInput";
+import TimerDisplay from "./TimerDisplay";
 import StartButton from "./StartButton";
 import PauseButton from "./PauseButton";
 import ClearButton from "./ClearButton";
@@ -98,14 +99,21 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <TimerInput
-          handleTimeSelectChange={this.handleTimeSelectChange}
-          timerStatus={this.state.timerStarted}
-          timeInMinutes={this.state.timeInMinutes}
-          timeInSeconds={this.state.timeInSeconds}
-          timer={this.state.timer}
-          updateTimer={this.updateTimer}
-        />
+        <div id="timer">
+          {/* Conditional rendering based on timerStarted state */}
+          {this.state.timerStarted === false ? (
+            <TimerInput
+              handleTimeSelectChange={this.handleTimeSelectChange}
+              timerStatus={this.state.timerStarted}
+              timeInMinutes={this.state.timeInMinutes}
+              timeInSeconds={this.state.timeInSeconds}
+              updateTimer={this.updateTimer}
+            />
+          ) : (
+            <TimerDisplay timer={this.state.timer} />
+          )}
+        </div>
+
         {/* Conditional rendering based on timerStarted state */}
         {this.state.timerStarted === false ? (
           <StartButton
