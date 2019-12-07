@@ -4,6 +4,8 @@ import Timer from "./Timer";
 import StartButton from "./StartButton";
 import ClearButton from "./ClearButton";
 
+let timerInterval;
+
 export default class App extends Component {
   state = {
     // Sets default state of timer state
@@ -13,7 +15,8 @@ export default class App extends Component {
     timeInMinutes: 25,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
-    timer: ""
+    timer: "",
+    timerInterval: ""
   };
 
   timerStart = () => {
@@ -51,7 +54,8 @@ export default class App extends Component {
       timer: minutes
     });
     // This then takes over altering the timer value every second
-    setInterval(() => {
+
+    timerInterval = setInterval(() => {
       if (minutes > 0 && this.state.timerStarted) {
         minutes = minutes - 1;
         this.setState({
@@ -59,16 +63,21 @@ export default class App extends Component {
           timer: minutes
         });
       } else if (this.state.timer === 0) {
-        clearInterval();
-        this.setState({
-          timerCycleActive: false,
-          timerStarted: false,
-          timeInMinutes: 25,
-          timer: ""
-        });
+        // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
+        this.timerReset();
       }
       // Change to 6000 when using minutes
     }, 1000);
+  };
+
+  timerReset = () => {
+    clearInterval(timerInterval);
+    this.setState({
+      timerCycleActive: false,
+      timerStarted: false,
+      timeInMinutes: 25,
+      timer: ""
+    });
   };
 
   render() {
@@ -88,7 +97,7 @@ export default class App extends Component {
           convertToSeconds={this.convertToSeconds}
           timer={this.timer}
         />
-        <ClearButton />
+        <ClearButton timerReset={this.timerReset} />
       </div>
     );
   }
