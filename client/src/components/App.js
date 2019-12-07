@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Timer from "./Timer";
 import StartButton from "./StartButton";
+import PauseButton from "./PauseButton";
 import ClearButton from "./ClearButton";
 
 let timerInterval;
@@ -12,11 +13,11 @@ export default class App extends Component {
     timerStarted: false,
     timerCycleActive: false,
     // Default value in minutes
-    timeInMinutes: 25,
+    timeInMinutes: 5,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
     timer: "",
-    timerInterval: ""
+    timerCycleCount: 0
   };
 
   timerStart = () => {
@@ -64,6 +65,9 @@ export default class App extends Component {
         });
       } else if (this.state.timer === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
+        this.setState(prevState => ({
+          timerCycleCount: prevState.timerCycleCount + 1
+        }));
         this.timerReset();
       }
       // Change to 6000 when using minutes
@@ -90,13 +94,18 @@ export default class App extends Component {
           timeInSeconds={this.state.timeInSeconds}
           timer={this.state.timer}
         />
-        <StartButton
-          timerStart={this.timerStart}
-          timerStatus={this.state.timerStarted}
-          timeInMinutes={this.state.timeInMinutes}
-          convertToSeconds={this.convertToSeconds}
-          timer={this.timer}
-        />
+        {this.state.timerStarted === false ? (
+          <StartButton
+            timerStart={this.timerStart}
+            timerStatus={this.state.timerStarted}
+            timeInMinutes={this.state.timeInMinutes}
+            convertToSeconds={this.convertToSeconds}
+            timer={this.timer}
+          />
+        ) : (
+          <PauseButton />
+        )}
+
         <ClearButton timerReset={this.timerReset} />
       </div>
     );
