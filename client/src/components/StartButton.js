@@ -1,18 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class StartButton extends Component {
-  render() {
-    return (
+const StartButton = props => {
+  return (
+    <div>
       <button
         id="button__start"
         onClick={() => {
-          this.props.timerStart();
-          this.props.convertToSeconds(this.props.timeInMinutes);
-          this.props.timer(this.props.timeInMinutes);
+          props.timerStart();
+          props.convertToSeconds(props.timeInMinutes);
+          props.timer(props.timeInMinutes);
         }}
       >
         Start
       </button>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default StartButton;
