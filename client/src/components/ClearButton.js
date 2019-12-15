@@ -4,7 +4,7 @@ export default class ClearButton extends Component {
   render() {
     return (
       <div id="clear-button">
-        <button>Clear</button>
+        <button onClick={this.props.timerReset}>Clear</button>
       </div>
     );
   }
