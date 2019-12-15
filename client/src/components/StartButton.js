@@ -8,7 +8,7 @@ const StartButton = props => {
         onClick={() => {
           props.timerStart();
           props.convertToSeconds(props.minutes);
-          props.timer(props.minutes);
+          props.timer();
         }}
       >
         Start

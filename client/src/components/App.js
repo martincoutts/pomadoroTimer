@@ -15,7 +15,7 @@ export default class App extends Component {
     timerCycleActive: false,
     // Default value in minutes and seconds
     minutes: 25,
-    seconds: 0,
+    seconds: 60,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
     timer: "",
@@ -46,25 +46,37 @@ export default class App extends Component {
     });
   };
 
-  timer = duration => {
+  timer = () => {
     this.setState({
       timerCycleActive: true
     });
-    let minutes = duration;
 
     // Makes sure that when start button is clicked the first second shows the input value before the interval kicks in
-    this.setState(prevState => ({
-      minutes: prevState.minutes - 1,
-      seconds: "00"
-    }));
+    this.setState({
+      seconds: 60
+    });
+    // Has to be called seperatley to seconds due to the timeout, makes sure the initial minutes show before changing to the current minute after 1 second
+    setTimeout(() => {
+      this.setState(prevState => ({
+        minutes: prevState.minutes - 1
+      }));
+    }, 1000);
 
     // Also named function so that interval can be referenced in other functions
     // This then takes over altering the timer value every second
     timerInterval = setInterval(() => {
       if (this.state.timeInSeconds > 0 && this.state.timerActive) {
         this.setState(prevState => ({
-          timeInSeconds: prevState.timeInSeconds - 1
+          timeInSeconds: prevState.timeInSeconds - 1,
+          seconds: prevState.seconds - 1
         }));
+
+        if (this.state.seconds === 0) {
+          this.setState(prevState => ({
+            seconds: 60,
+            minutes: prevState.minutes - 1
+          }));
+        }
       } else if (this.state.timeInSeconds === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
         this.setState(prevState => ({
@@ -73,7 +85,7 @@ export default class App extends Component {
         this.timerReset();
       }
       // Change to 6000 when using minutes
-    }, 1000);
+    }, 200);
   };
 
   // Alters timerActive state to show start button and then clears interval.
