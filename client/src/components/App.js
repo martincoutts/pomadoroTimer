@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import Header from "./Header";
 import TimerInput from "./TimerInput";
 import TimerDisplay from "./TimerDisplay";
 import StartButton from "./StartButton";
@@ -10,6 +11,8 @@ let timerInterval;
 
 export default class App extends Component {
   state = {
+    date: new Date(),
+
     // Sets default state of timer state
     timerActive: false,
     timerCycleActive: false,
@@ -19,7 +22,9 @@ export default class App extends Component {
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
     timerCycleCount: 0,
-    isDueBreak: false
+    isDueBreak: false,
+    studyPeriods: 0,
+    breaksTaken: 0
   };
 
   timerStart = () => {
@@ -86,6 +91,15 @@ export default class App extends Component {
           timerCycleCount: prevState.timerCycleCount + 1,
           isDueBreak: !prevState.isDueBreak
         }));
+
+        this.state.isDueBreak
+          ? this.setState(prevState => ({
+              studyPeriods: prevState.studyPeriods + 1
+            }))
+          : this.setState(prevState => ({
+              breaksTaken: prevState.breaksTaken + 1
+            }));
+
         this.timerReset();
       }
       // Change to 6000 when using minutes
@@ -107,6 +121,7 @@ export default class App extends Component {
     clearInterval(timerInterval);
 
     if (this.state.isDueBreak) {
+      // Checks for every 5th cycle count and if so sets larger break time else just the normal break
       this.state.timerCycleCount % 5 === 0
         ? this.setBreak(15)
         : this.setBreak(5);
@@ -133,6 +148,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <div id="timer">
           {/* Conditional rendering based on timerActive state */}
           {this.state.timerActive === false ? (
