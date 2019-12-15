@@ -18,8 +18,8 @@ export default class App extends Component {
     seconds: 60,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
-    timer: "",
-    timerCycleCount: 0
+    timerCycleCount: 0,
+    isDueBreak: false
   };
 
   timerStart = () => {
@@ -83,12 +83,13 @@ export default class App extends Component {
       } else if (this.state.timeInSeconds === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
         this.setState(prevState => ({
-          timerCycleCount: prevState.timerCycleCount + 1
+          timerCycleCount: prevState.timerCycleCount + 1,
+          isDueBreak: !prevState.isDueBreak
         }));
         this.timerReset();
       }
       // Change to 6000 when using minutes
-    }, 1000);
+    }, 100);
   };
 
   // Alters timerActive state to show start button and then clears interval.
@@ -105,13 +106,28 @@ export default class App extends Component {
   timerReset = () => {
     clearInterval(timerInterval);
 
-    this.setState({
-      timerCycleActive: false,
-      timerActive: false,
-      minutes: 25,
+    if (this.state.isDueBreak) {
+      this.state.timerCycleCount % 5 === 0
+        ? this.setBreak(15)
+        : this.setBreak(5);
+    } else {
+      this.setState({
+        timerCycleActive: false,
+        timerActive: false,
+        minutes: 25,
+        seconds: 0,
+        timeInSeconds: 1500
+      });
+    }
+  };
+
+  setBreak = breakTime => {
+    this.setState(prevState => ({
+      minutes: breakTime,
       seconds: 0,
-      timeInSeconds: 1500
-    });
+      timerCycleActive: false,
+      timerActive: false
+    }));
   };
 
   render() {
@@ -130,7 +146,6 @@ export default class App extends Component {
             />
           ) : (
             <TimerDisplay
-              timer={this.state.timer}
               minutes={this.state.minutes}
               seconds={this.state.seconds}
             />
