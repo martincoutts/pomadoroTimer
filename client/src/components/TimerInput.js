@@ -8,7 +8,7 @@ const TimerInput = props => {
       type="number"
       min="1"
       max="60"
-      value={props.timeInMinutes}
+      value={props.minutes}
       onChange={props.handleTimeSelectChange}
     ></input>
   );

@@ -13,8 +13,9 @@ export default class App extends Component {
     // Sets default state of timer state
     timerActive: false,
     timerCycleActive: false,
-    // Default value in minutes
-    timeInMinutes: 25,
+    // Default value in minutes and seconds
+    minutes: 25,
+    seconds: 0,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
     timer: "",
@@ -32,7 +33,7 @@ export default class App extends Component {
       parseInt(event.target.value) > 0 &&
       parseInt(event.target.value) <= 60
     ) {
-      this.setState({ timeInMinutes: parseInt(event.target.value) });
+      this.setState({ minutes: parseInt(event.target.value) });
     } else {
       alert("Please select a value between 1 and 60");
     }
@@ -52,19 +53,19 @@ export default class App extends Component {
     let minutes = duration;
 
     // Makes sure that when start button is clicked the first second shows the input value before the interval kicks in
-    this.setState({
-      timer: minutes
-    });
+    this.setState(prevState => ({
+      minutes: prevState.minutes - 1,
+      seconds: "00"
+    }));
 
+    // Also named function so that interval can be referenced in other functions
     // This then takes over altering the timer value every second
     timerInterval = setInterval(() => {
-      if (minutes > 0 && this.state.timerActive) {
-        minutes = minutes - 1;
-        this.setState({
-          timeInMinutes: minutes,
-          timer: minutes
-        });
-      } else if (this.state.timer === 0) {
+      if (this.state.timeInSeconds > 0 && this.state.timerActive) {
+        this.setState(prevState => ({
+          timeInSeconds: prevState.timeInSeconds - 1
+        }));
+      } else if (this.state.timeInSeconds === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
         this.setState(prevState => ({
           timerCycleCount: prevState.timerCycleCount + 1
@@ -92,8 +93,9 @@ export default class App extends Component {
     this.setState({
       timerCycleActive: false,
       timerActive: false,
-      timeInMinutes: 25,
-      timer: ""
+      minutes: 25,
+      seconds: 0,
+      timeInSeconds: 1500
     });
   };
 
@@ -106,12 +108,17 @@ export default class App extends Component {
             <TimerInput
               handleTimeSelectChange={this.handleTimeSelectChange}
               timerStatus={this.state.timerActive}
-              timeInMinutes={this.state.timeInMinutes}
+              minutes={this.state.minutes}
+              seconds={this.state.seconds}
               timeInSeconds={this.state.timeInSeconds}
               updateTimer={this.updateTimer}
             />
           ) : (
-            <TimerDisplay timer={this.state.timer} />
+            <TimerDisplay
+              timer={this.state.timer}
+              minutes={this.state.minutes}
+              seconds={this.state.seconds}
+            />
           )}
         </div>
 
@@ -120,7 +127,7 @@ export default class App extends Component {
           <StartButton
             timerStart={this.timerStart}
             timerStatus={this.state.timerActive}
-            timeInMinutes={this.state.timeInMinutes}
+            minutes={this.state.minutes}
             convertToSeconds={this.convertToSeconds}
             timer={this.timer}
           />
