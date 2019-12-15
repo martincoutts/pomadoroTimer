@@ -6,6 +6,7 @@ import TimerDisplay from "./TimerDisplay";
 import StartButton from "./StartButton";
 import PauseButton from "./PauseButton";
 import ClearButton from "./ClearButton";
+import InfoDisplay from "./InfoDisplay";
 
 let timerInterval;
 
@@ -182,6 +183,11 @@ export default class App extends Component {
         )}
 
         <ClearButton timerReset={this.timerReset} />
+        <InfoDisplay
+          date={this.state.date}
+          studyPeriods={this.state.studyPeriods}
+          breaksTaken={this.state.breaksTaken}
+        />
       </div>
     );
   }
