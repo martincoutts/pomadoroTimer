@@ -65,13 +65,16 @@ export default class App extends Component {
     // Also named function so that interval can be referenced in other functions
     // This then takes over altering the timer value every second
     timerInterval = setInterval(() => {
+      // If the time in seconds is more than 0 and the timer has been started
+      // Remove a second from the seconds and time in seconds every second
       if (this.state.timeInSeconds > 0 && this.state.timerActive) {
         this.setState(prevState => ({
           timeInSeconds: prevState.timeInSeconds - 1,
           seconds: prevState.seconds - 1
         }));
-
-        if (this.state.seconds === 0) {
+        // If the seconds = 0 change them back to 60 to start a new minute
+        // Also take one minute from minutes state
+        if (this.state.seconds === 0 && this.state.minutes > 0) {
           this.setState(prevState => ({
             seconds: 60,
             minutes: prevState.minutes - 1
@@ -85,7 +88,7 @@ export default class App extends Component {
         this.timerReset();
       }
       // Change to 6000 when using minutes
-    }, 200);
+    }, 1000);
   };
 
   // Alters timerActive state to show start button and then clears interval.
