@@ -1,10 +1,11 @@
 import React from "react";
 
 const StartButton = props => {
+  const BEM_BASE = "start-button";
   return (
-    <div>
+    <div className={`${BEM_BASE} ${BEM_BASE}--container`}>
       <button
-        id="button__start"
+        className={`${BEM_BASE} ${BEM_BASE}--button`}
         onClick={() => {
           props.timerStart();
           props.convertToSeconds(props.minutes);

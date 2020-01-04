@@ -1,11 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class ClearButton extends Component {
-  render() {
-    return (
-      <div id="clear-button">
-        <button onClick={this.props.timerReset}>Clear</button>
-      </div>
-    );
-  }
-}
+const ClearButton = props => {
+  const BEM_BASE = "clear-button";
+  return (
+    <div className={`${BEM_BASE} ${BEM_BASE}--container`}>
+      <button
+        className={`${BEM_BASE} ${BEM_BASE}--button`}
+        onClick={props.timerReset}
+      >
+        Clear
+      </button>
+    </div>
+  );
+};
+
+export default ClearButton;
