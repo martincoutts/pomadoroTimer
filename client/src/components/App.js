@@ -12,7 +12,7 @@ let timerInterval;
 
 export default class App extends Component {
   state = {
-    date: new Date(),
+    date: "",
 
     // Sets default state of timer state
     timerActive: false,
@@ -27,6 +27,18 @@ export default class App extends Component {
     studyPeriods: 0,
     breaksTaken: 0
   };
+
+  componentDidMount() {
+    this.getDate();
+  }
+
+  getDate() {
+    var date = new Date().toLocaleString().split(",")[0];
+
+    this.setState({
+      date: date
+    });
+  }
 
   timerStart = () => {
     this.setState(prevState => ({
@@ -104,7 +116,7 @@ export default class App extends Component {
         this.timerReset();
       }
       // Change to 6000 when using minutes
-    }, 100);
+    }, 1000);
   };
 
   // Alters timerActive state to show start button and then clears interval.

@@ -1,13 +1,12 @@
 import React from "react";
 
-const InfoDisplay = props => {
-  let date = props.date.getDate();
-  let month = props.date.getMonth();
-  let year = props.date.getYear();
+import Moment from "react-moment";
+import "moment-timezone";
 
+const InfoDisplay = props => {
   return (
     <div className="info-display--container">
-      <span>{`${date} ${month} ${year}`}</span>
+      <Moment format="Do MMMM YYYY">{props.date}</Moment>
       <span>{props.studyPeriods}</span>
       <span>{props.breaksTaken}</span>
     </div>
