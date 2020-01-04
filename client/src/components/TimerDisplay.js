@@ -1,6 +1,7 @@
 import React from "react";
 
 const TimerDisplay = props => {
+  const BEM_BASE = "timer-display";
   let minutesText;
   let secondsText;
 
@@ -22,7 +23,9 @@ const TimerDisplay = props => {
   }
 
   return (
-    <span className="timer timer__span">{`${minutesText}:${secondsText}`}</span>
+    <span
+      className={`${BEM_BASE} ${BEM_BASE}--span`}
+    >{`${minutesText}:${secondsText}`}</span>
   );
 };
 

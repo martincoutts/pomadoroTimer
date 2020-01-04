@@ -1,10 +1,16 @@
 import React from "react";
 
 const PauseButton = props => {
+  const BEM_BASE = "pause-button";
   return (
-    <button className="button" id="button__pause" onClick={props.timerPause}>
-      Pause
-    </button>
+    <div className={`${BEM_BASE} ${BEM_BASE}--container`}>
+      <button
+        className={`${BEM_BASE} ${BEM_BASE}--button`}
+        onClick={props.timerPause}
+      >
+        Pause
+      </button>
+    </div>
   );
 };
 

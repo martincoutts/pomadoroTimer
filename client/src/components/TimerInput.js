@@ -1,10 +1,11 @@
 import React from "react";
 
 const TimerInput = props => {
+  const BEM_BASE = "timer-input";
   return (
     <input
       id="timeSelector"
-      className="timer timer__input"
+      className={`${BEM_BASE} ${BEM_BASE}--input`}
       type="number"
       min="1"
       max="60"

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 
+import Header from "./Header";
 import TimerInput from "./TimerInput";
 import TimerDisplay from "./TimerDisplay";
 import StartButton from "./StartButton";
 import PauseButton from "./PauseButton";
 import ClearButton from "./ClearButton";
+import InfoDisplay from "./InfoDisplay";
 
 let timerInterval;
 
 export default class App extends Component {
   state = {
+    date: "",
+
     // Sets default state of timer state
     timerActive: false,
     timerCycleActive: false,
@@ -18,9 +22,23 @@ export default class App extends Component {
     seconds: 60,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
-    timer: "",
-    timerCycleCount: 0
+    timerCycleCount: 0,
+    isDueBreak: false,
+    studyPeriods: 0,
+    breaksTaken: 0
   };
+
+  componentDidMount() {
+    this.getDate();
+  }
+
+  getDate() {
+    var date = new Date().toLocaleString().split(",")[0];
+
+    this.setState({
+      date: date
+    });
+  }
 
   timerStart = () => {
     this.setState(prevState => ({
@@ -83,8 +101,18 @@ export default class App extends Component {
       } else if (this.state.timeInSeconds === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
         this.setState(prevState => ({
-          timerCycleCount: prevState.timerCycleCount + 1
+          timerCycleCount: prevState.timerCycleCount + 1,
+          isDueBreak: !prevState.isDueBreak
         }));
+
+        this.state.isDueBreak
+          ? this.setState(prevState => ({
+              studyPeriods: prevState.studyPeriods + 1
+            }))
+          : this.setState(prevState => ({
+              breaksTaken: prevState.breaksTaken + 1
+            }));
+
         this.timerReset();
       }
       // Change to 6000 when using minutes
@@ -105,18 +133,35 @@ export default class App extends Component {
   timerReset = () => {
     clearInterval(timerInterval);
 
-    this.setState({
-      timerCycleActive: false,
-      timerActive: false,
-      minutes: 25,
+    if (this.state.isDueBreak) {
+      // Checks for every 5th cycle count and if so sets larger break time else just the normal break
+      this.state.timerCycleCount % 5 === 0
+        ? this.setBreak(15)
+        : this.setBreak(5);
+    } else {
+      this.setState({
+        timerCycleActive: false,
+        timerActive: false,
+        minutes: 25,
+        seconds: 0,
+        timeInSeconds: 1500
+      });
+    }
+  };
+
+  setBreak = breakTime => {
+    this.setState(prevState => ({
+      minutes: breakTime,
       seconds: 0,
-      timeInSeconds: 1500
-    });
+      timerCycleActive: false,
+      timerActive: false
+    }));
   };
 
   render() {
     return (
       <div className="App">
+        <Header />
         <div id="timer">
           {/* Conditional rendering based on timerActive state */}
           {this.state.timerActive === false ? (
@@ -130,7 +175,6 @@ export default class App extends Component {
             />
           ) : (
             <TimerDisplay
-              timer={this.state.timer}
               minutes={this.state.minutes}
               seconds={this.state.seconds}
             />
@@ -151,6 +195,11 @@ export default class App extends Component {
         )}
 
         <ClearButton timerReset={this.timerReset} />
+        <InfoDisplay
+          date={this.state.date}
+          studyPeriods={this.state.studyPeriods}
+          breaksTaken={this.state.breaksTaken}
+        />
       </div>
     );
   }
