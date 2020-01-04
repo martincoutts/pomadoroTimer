@@ -162,7 +162,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header />
-        <div id="timer">
+        <div className="timer timer--container">
           {/* Conditional rendering based on timerActive state */}
           {this.state.timerActive === false ? (
             <TimerInput
@@ -181,18 +181,20 @@ export default class App extends Component {
           )}
         </div>
 
-        {/* Conditional rendering based on timerActive state */}
-        {this.state.timerActive === false ? (
-          <StartButton
-            timerStart={this.timerStart}
-            timerStatus={this.state.timerActive}
-            minutes={this.state.minutes}
-            convertToSeconds={this.convertToSeconds}
-            timer={this.timer}
-          />
-        ) : (
-          <PauseButton timerPause={this.timerPause} />
-        )}
+        <div className={`start-pause-button start-pause-button--container`}>
+          {/* Conditional rendering based on timerActive state */}
+          {this.state.timerActive === false ? (
+            <StartButton
+              timerStart={this.timerStart}
+              timerStatus={this.state.timerActive}
+              minutes={this.state.minutes}
+              convertToSeconds={this.convertToSeconds}
+              timer={this.timer}
+            />
+          ) : (
+            <PauseButton timerPause={this.timerPause} />
+          )}
+        </div>
 
         <ClearButton timerReset={this.timerReset} />
         <InfoDisplay
