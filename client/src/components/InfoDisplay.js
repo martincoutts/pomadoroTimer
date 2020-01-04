@@ -17,6 +17,9 @@ const InfoDisplay = props => {
         </span>
       </div>
       <div className={`${BEM_BASE}  ${BEM_BASE}--item-container`}>
+        <h4 className={`${BEM_BASE}  ${BEM_BASE}--sub-header`}>
+          Study Periods Complete:
+        </h4>
         <span
           className={`${BEM_BASE} ${BEM_BASE}--span ${BEM_BASE}--span__study-periods`}
         >
@@ -24,6 +27,9 @@ const InfoDisplay = props => {
         </span>
       </div>
       <div className={`${BEM_BASE}  ${BEM_BASE}--item-container`}>
+        <h4 className={`${BEM_BASE}  ${BEM_BASE}--sub-header`}>
+          Breaks Taken:
+        </h4>
         <span
           className={`${BEM_BASE} ${BEM_BASE}--span ${BEM_BASE}--span__breaks-taken`}
         >
