@@ -1,7 +1,5 @@
 .timer--container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  margin: auto;
 
   @include md {
     grid-column: 1 / 2;
