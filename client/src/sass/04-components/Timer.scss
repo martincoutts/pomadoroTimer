@@ -1,4 +1,20 @@
 .timer--container {
-  grid-column-start: 1 / 2;
-  grid-row: 2 / 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+
+  @include md {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+}
+
+.timer-display {
+  &--container {
+    margin: auto;
+    @include md {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+  }
 }

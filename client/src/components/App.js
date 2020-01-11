@@ -163,40 +163,45 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <div className="timer timer--container">
-          {/* Conditional rendering based on timerActive state */}
-          {this.state.timerActive === false ? (
-            <TimerInput
-              handleTimeSelectChange={this.handleTimeSelectChange}
-              timerStatus={this.state.timerActive}
-              minutes={this.state.minutes}
-              seconds={this.state.seconds}
-              timeInSeconds={this.state.timeInSeconds}
-              updateTimer={this.updateTimer}
-            />
-          ) : (
-            <TimerDisplay
-              minutes={this.state.minutes}
-              seconds={this.state.seconds}
-            />
-          )}
+          <div className="timer-display timer-display--container">
+            {/* Conditional rendering based on timerActive state */}
+            {this.state.timerActive === false ? (
+              <TimerInput
+                handleTimeSelectChange={this.handleTimeSelectChange}
+                timerStatus={this.state.timerActive}
+                minutes={this.state.minutes}
+                seconds={this.state.seconds}
+                timeInSeconds={this.state.timeInSeconds}
+                updateTimer={this.updateTimer}
+              />
+            ) : (
+              <TimerDisplay
+                minutes={this.state.minutes}
+                seconds={this.state.seconds}
+              />
+            )}
+          </div>
+
+          <div className="buttons buttons--container">
+            <div className={`start-pause-button start-pause-button--container`}>
+              {/* Conditional rendering based on timerActive state */}
+              {this.state.timerActive === false ? (
+                <StartButton
+                  timerStart={this.timerStart}
+                  timerStatus={this.state.timerActive}
+                  minutes={this.state.minutes}
+                  convertToSeconds={this.convertToSeconds}
+                  timer={this.timer}
+                />
+              ) : (
+                <PauseButton timerPause={this.timerPause} />
+              )}
+            </div>
+
+            <ClearButton timerReset={this.timerReset} />
+          </div>
         </div>
 
-        <div className={`start-pause-button start-pause-button--container`}>
-          {/* Conditional rendering based on timerActive state */}
-          {this.state.timerActive === false ? (
-            <StartButton
-              timerStart={this.timerStart}
-              timerStatus={this.state.timerActive}
-              minutes={this.state.minutes}
-              convertToSeconds={this.convertToSeconds}
-              timer={this.timer}
-            />
-          ) : (
-            <PauseButton timerPause={this.timerPause} />
-          )}
-        </div>
-
-        <ClearButton timerReset={this.timerReset} />
         <InfoDisplay
           date={this.state.date}
           studyPeriods={this.state.studyPeriods}

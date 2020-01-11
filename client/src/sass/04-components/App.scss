@@ -2,9 +2,8 @@
   font-family: $font-primary;
 
   display: grid;
-
   @include md {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 20% 1fr;
   }
 }
