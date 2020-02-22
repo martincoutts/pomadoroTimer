@@ -20,6 +20,8 @@ export default class App extends Component {
     // Default value in minutes and seconds
     minutes: 25,
     seconds: 60,
+    selectedValue: 25,
+    timeDecimal: 25.0,
     // Default value in seconds (25 * 60)
     timeInSeconds: 1500,
     timerCycleCount: 0,
@@ -48,10 +50,25 @@ export default class App extends Component {
 
   handleTimeSelectChange = event => {
     if (parseInt(event) > 0 && parseInt(event) <= 60) {
-      this.setState({ minutes: parseInt(event) });
+      this.setState({
+        minutes: parseInt(event),
+        selectedValue: parseInt(event)
+      });
     } else {
       alert("Please select a value between 1 and 60");
     }
+  };
+
+  findTimePercentage = () => {
+    const mins = this.state.minutes;
+    let seconds = this.state.seconds;
+
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+
+    const decimal = parseFloat(`${mins}.${seconds}`);
+    this.setState({ timeDecimal: decimal });
   };
 
   convertToSeconds = mins => {
@@ -95,6 +112,7 @@ export default class App extends Component {
             minutes: prevState.minutes - 1
           }));
         }
+        this.findTimePercentage();
       } else if (this.state.timeInSeconds === 0) {
         // Timer ends it calls the reset however must also add to the timerCycleCount as this is a completed cycle
         this.setState(prevState => ({
@@ -175,6 +193,8 @@ export default class App extends Component {
               <TimerDisplay
                 minutes={this.state.minutes}
                 seconds={this.state.seconds}
+                selectedValue={this.state.selectedValue}
+                timeDecimal={this.state.timeDecimal}
               />
             )}
           </div>

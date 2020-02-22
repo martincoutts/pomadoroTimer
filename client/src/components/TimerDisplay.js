@@ -1,4 +1,5 @@
 import React from "react";
+import { CircularProgressbar } from "react-circular-progressbar";
 
 const TimerDisplay = props => {
   const BEM_BASE = "timer-display";
@@ -23,9 +24,12 @@ const TimerDisplay = props => {
   }
 
   return (
-    <span
-      className={`${BEM_BASE} ${BEM_BASE}--span`}
-    >{`${minutesText}:${secondsText}`}</span>
+    <CircularProgressbar
+      value={props.timeDecimal}
+      text={`${minutesText}:${secondsText}`}
+      maxValue={props.selectedValue}
+      minValue={0}
+    />
   );
 };
 
