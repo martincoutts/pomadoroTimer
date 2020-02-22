@@ -1,14 +1,15 @@
 import React from "react";
+import { Button } from "antd";
 
 const PauseButton = props => {
   const BEM_BASE = "start-pause-button";
   return (
-    <button
+    <Button
       className={`${BEM_BASE} ${BEM_BASE}--button__pause`}
       onClick={props.timerPause}
     >
       Pause
-    </button>
+    </Button>
   );
 };
 

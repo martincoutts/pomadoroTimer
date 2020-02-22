@@ -1,9 +1,10 @@
 import React from "react";
+import { Button } from "antd";
 
 const StartButton = props => {
   const BEM_BASE = "start-pause-button";
   return (
-    <button
+    <Button
       className={`${BEM_BASE} ${BEM_BASE}--button__start`}
       onClick={() => {
         props.timerStart();
@@ -12,7 +13,7 @@ const StartButton = props => {
       }}
     >
       Start
-    </button>
+    </Button>
   );
 };
 

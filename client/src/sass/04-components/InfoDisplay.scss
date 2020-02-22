@@ -2,7 +2,7 @@
   &--container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 40% 60%;
     @include md {
       grid-column: 2/3;
       grid-row: 2/4;
@@ -12,12 +12,12 @@
   &--item-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
 
     &__date {
       grid-column: 1/3;
       grid-row: 1/2;
+      align-self: center;
     }
     &__study-periods {
       grid-column: 1/2;
