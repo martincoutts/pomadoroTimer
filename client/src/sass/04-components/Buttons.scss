@@ -1,7 +1,21 @@
 .buttons {
   &--container {
-    display: flex;
-    margin: 0 auto;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+
+    // margin: 0 auto;
+
+    .timer-button {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    // .start-pause-button--container,
+    // .clear-button--container {
+    // }
 
     @include md {
       grid-column: 1 / 2;

@@ -5,7 +5,7 @@ const PauseButton = props => {
   const BEM_BASE = "start-pause-button";
   return (
     <Button
-      className={`${BEM_BASE} ${BEM_BASE}--button__pause`}
+      className={`${BEM_BASE} ${BEM_BASE}--button__pause timer-button`}
       onClick={props.timerPause}
     >
       Pause

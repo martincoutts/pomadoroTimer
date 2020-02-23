@@ -1,18 +1,43 @@
 .timer--container {
-  margin: auto;
+  // margin: auto;
 
   @include md {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+
+    align-items: center;
+
+    display: grid;
+    grid-template-rows: 50% 50%;
   }
 }
 
 .timer-display {
   &--container {
-    margin: auto;
+    margin: 0 auto;
+
     @include md {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
+    }
+  }
+
+  .timer-display {
+    &__progress-bar {
+      .CircularProgressbar-path {
+        stroke: $color-primary;
+      }
+      .CircularProgressbar-text {
+        fill: $color-primary;
+      }
+      &--study-break {
+        .CircularProgressbar-path {
+          stroke: $color-study-period;
+        }
+        .CircularProgressbar-text {
+          fill: $color-study-period;
+        }
+      }
     }
   }
 }

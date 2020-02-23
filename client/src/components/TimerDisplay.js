@@ -3,6 +3,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 
 const TimerDisplay = props => {
   const BEM_BASE = "timer-display";
+  const modifier = props.isDueBreak ? "--study-break" : "";
   let minutesText;
   let secondsText;
 
@@ -25,6 +26,7 @@ const TimerDisplay = props => {
 
   return (
     <CircularProgressbar
+      className={`${BEM_BASE}__progress-bar${modifier}`}
       value={props.timeDecimal}
       text={`${minutesText}:${secondsText}`}
       maxValue={props.selectedValue}

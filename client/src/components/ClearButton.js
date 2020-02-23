@@ -6,7 +6,7 @@ const ClearButton = props => {
   return (
     <div className={`${BEM_BASE} ${BEM_BASE}--container`}>
       <Button
-        className={`${BEM_BASE} ${BEM_BASE}--button`}
+        className={`${BEM_BASE} ${BEM_BASE}--button timer-button`}
         onClick={props.timerReset}
       >
         Clear

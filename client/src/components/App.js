@@ -195,6 +195,7 @@ export default class App extends Component {
                 seconds={this.state.seconds}
                 selectedValue={this.state.selectedValue}
                 timeDecimal={this.state.timeDecimal}
+                isDueBreak={this.state.isDueBreak}
               />
             )}
           </div>

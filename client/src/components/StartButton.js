@@ -5,7 +5,7 @@ const StartButton = props => {
   const BEM_BASE = "start-pause-button";
   return (
     <Button
-      className={`${BEM_BASE} ${BEM_BASE}--button__start`}
+      className={`${BEM_BASE} ${BEM_BASE}--button__start timer-button`}
       onClick={() => {
         props.timerStart();
         props.convertToSeconds(props.minutes);
