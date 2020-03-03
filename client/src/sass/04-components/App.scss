@@ -2,12 +2,12 @@
   font-family: $font-primary;
 
   display: grid;
+  column-gap: 1.5rem;
+  grid-template-rows: 20% auto auto;
 
-  @include lg {
-    padding: 3rem;
-  }
   @include md {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 20% 1fr;
+    grid-template-rows: 20% 1fr 10%;
+    padding: 0 2rem;
   }
 }
