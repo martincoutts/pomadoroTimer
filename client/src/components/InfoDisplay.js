@@ -8,22 +8,34 @@ const InfoDisplay = props => {
 
   return (
     <div className={`${BEM_BASE}  ${BEM_BASE}--container`}>
-      <div className={`${BEM_BASE}  ${BEM_BASE}--item-container`}>
+      <div
+        className={`${BEM_BASE} ${BEM_BASE}--item-container ${BEM_BASE}--item-container__date`}
+      >
         {" "}
-        <span
-          className={`${BEM_BASE} ${BEM_BASE}--span ${BEM_BASE}--span__date`}
+        <h3
+          className={`${BEM_BASE} ${BEM_BASE}--header ${BEM_BASE}--header__date`}
         >
           <Moment format="Do MMMM YYYY">{props.date}</Moment>
-        </span>
+        </h3>
       </div>
-      <div className={`${BEM_BASE}  ${BEM_BASE}--item-container`}>
+      <div
+        className={`${BEM_BASE} ${BEM_BASE}--item-container  ${BEM_BASE}--item-container__study-periods`}
+      >
+        <h4 className={`${BEM_BASE}   ${BEM_BASE}--sub-header__study-periods`}>
+          Study Periods Complete:
+        </h4>
         <span
           className={`${BEM_BASE} ${BEM_BASE}--span ${BEM_BASE}--span__study-periods`}
         >
           {props.studyPeriods}
         </span>
       </div>
-      <div className={`${BEM_BASE}  ${BEM_BASE}--item-container`}>
+      <div
+        className={`${BEM_BASE} ${BEM_BASE}--item-container  ${BEM_BASE}--item-container__breaks-taken`}
+      >
+        <h4 className={`${BEM_BASE}  ${BEM_BASE}--sub-header`}>
+          Breaks Taken:
+        </h4>
         <span
           className={`${BEM_BASE} ${BEM_BASE}--span ${BEM_BASE}--span__breaks-taken`}
         >

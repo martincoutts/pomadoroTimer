@@ -1,17 +1,18 @@
 import React from "react";
+import { InputNumber } from "antd";
 
 const TimerInput = props => {
   const BEM_BASE = "timer-input";
   return (
-    <input
+    <InputNumber
       id="timeSelector"
       className={`${BEM_BASE} ${BEM_BASE}--input`}
-      type="number"
       min="1"
       max="60"
       value={props.minutes}
       onChange={props.handleTimeSelectChange}
-    ></input>
+      size="large"
+    />
   );
 };
 
