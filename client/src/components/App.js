@@ -35,7 +35,7 @@ export default class App extends Component {
   }
 
   getDate() {
-    var date = new Date().toLocaleString().split(",")[0];
+    var date = new Date();
 
     this.setState({
       date: date
