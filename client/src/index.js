@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "../node_modules/antd/dist/antd.min.css";
+import "react-circular-progressbar/dist/styles.css";
 import "./index.scss";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";

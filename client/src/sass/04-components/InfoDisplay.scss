@@ -1,0 +1,34 @@
+.info-display {
+  &--container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 50% 50%;
+
+    @include md {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      border: 0.5px solid $color-border;
+    }
+  }
+
+  &--item-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+
+    &__date {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      align-self: center;
+    }
+    &__study-periods {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+    &__breaks-taken {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+  }
+}

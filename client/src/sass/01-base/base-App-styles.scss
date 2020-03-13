@@ -1,4 +1,30 @@
+// Sets base font size so that 1 rem = 10px
+html {
+  font-size: 62.5%;
+}
 // Makes sure app container fills entire veiwport
+
 .App {
-  min-height: 100vh;
+  font-size: 1.4rem;
+
+  height: 100vh;
+  width: 100%;
+  h1 {
+    font-size: 2.8rem;
+  }
+  h2 {
+    font-size: 2.6rem;
+  }
+  h3 {
+    font-size: 2.4rem;
+  }
+  h4 {
+    font-size: 2.2rem;
+  }
+  h5 {
+    font-size: 2rem;
+  }
+  h6 {
+    font-size: 1.8rem;
+  }
 }
