@@ -5,7 +5,7 @@
   "dependencies": {
     "antd": "^3.26.11",
     "moment-timezone": "^0.5.28",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.11.0",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.11.0",
